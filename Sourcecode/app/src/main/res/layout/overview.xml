@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    tools:context=".MainActivity">
+
+    <GridView
+        android:id="@+id/grid"
+        android:layout_width="match_parent"
+        android:layout_height="384dp"
+        android:layout_marginTop="57dp"
+        android:gravity="center"
+        android:numColumns="4"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/calendar_background" />
+
+    <ImageView
+        android:id="@+id/calendar_background"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:contentDescription="@string/appName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/background_calender" />
+
+    <TextView
+        android:id="@+id/year"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/impact"
+        android:includeFontPadding="false"
+        android:text="@string/year_value"
+        android:textColor="#78FFED"
+        android:textSize="35sp"
+        app:layout_constraintEnd_toEndOf="@+id/calendar_background"
+        app:layout_constraintStart_toStartOf="@+id/calendar_background"
+        app:layout_constraintTop_toTopOf="@+id/calendar_background" />
+
+    <TextView
+        android:id="@+id/month"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:fontFamily="@font/impact"
+        android:includeFontPadding="false"
+        android:text="@string/month_value"
+        android:textColor="#78FFED"
+        android:textSize="35sp"
+        app:layout_constraintEnd_toEndOf="@+id/calendar_background"
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toStartOf="@+id/calendar_background"
+        app:layout_constraintTop_toTopOf="@+id/calendar_background" />
+
+    <TextView
+        android:id="@+id/day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="124dp"
+        android:fontFamily="@font/impact"
+        android:includeFontPadding="false"
+        android:text="@string/day_value"
+        android:textColor="#78FFED"
+        android:textSize="35sp"
+        app:layout_constraintEnd_toEndOf="@+id/calendar_background"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="@+id/calendar_background"
+        app:layout_constraintTop_toTopOf="@+id/calendar_background" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

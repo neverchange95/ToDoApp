@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">ToDoList</string>
+    <string name="month_value">Januar</string>
+    <string name="year_value">2021</string>
+    <string name="day_value">Mo. 01</string>
+    <string name="appName">TODO</string>
+    <string name="day_input">Mo. 01</string>
+</resources>

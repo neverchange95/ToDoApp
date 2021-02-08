@@ -11,7 +11,8 @@
         android:id="@+id/menu_button_todo"
         android:layout_width="61dp"
         android:layout_height="58dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="52dp"
         android:layout_marginEnd="241dp"
         android:background="@drawable/menu_button"
         app:layout_constraintEnd_toEndOf="@+id/calendar_background"
@@ -79,13 +80,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="236dp"
         android:fontFamily="@font/arialr"
         android:text="Choose your Date:"
         android:textColor="#78B7FF"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/calendar_background" />
+        app:layout_constraintTop_toTopOf="@+id/calendar_background" />
 
     <CalendarView
         android:id="@+id/calendarView"

@@ -32,10 +32,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.overview);
 
-        String[] days = {"Mo. 01", "Di. 02", "Mi. 03", "Do. 05", "Fr. 06", "Sa. 07", "So. 08", "Mo. 09", "Di. 10", "Mi. 11", "Do. 12", "Fr. 13", "Sa. 14", "So. 15", "Mo. 16", "Di. 17", "Mi. 18", "Do. 19", "Fr. 20", "Sa. 21", "So. 22", "Mo. 23", "Di. 24", "Mi. 25", "Do. 26", "Fr. 27", "Sa. 28", "So. 29", "Mo. 30", "Di. 31"};
-        GridView layout = findViewById(R.id.grid);
-        layout.setAdapter(new DayAdapter(this, days));
-
         this.day = findViewById(R.id.day);
         this.month = findViewById(R.id.month);
         this.year = findViewById(R.id.year);
@@ -44,6 +40,11 @@ public class MainActivity extends AppCompatActivity {
         day.setText(dh.getDay());
         month.setText(dh.getMonth());
         year.setText(dh.getYear());
+
+
+        String[] days = dh.getAllDaysFormatted(); // get array with all days of the current month formatted like Mo. 01 from class DateHandler
+        GridView layout = findViewById(R.id.grid);
+        layout.setAdapter(new DayAdapter(this, days));
 
 
         ImageView calendar = findViewById(R.id.calendar_background);

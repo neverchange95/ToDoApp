@@ -3,9 +3,11 @@ package com.application;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.http.SslCertificate;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -30,11 +32,11 @@ public class ToDoActivity extends AppCompatActivity {
         year.setText(dh.getYear());
 
 
+        final ToDoAdapter adapter = new ToDoAdapter(this);
 
 
-
-        GridView layout = findViewById(R.id.grid_todo);
-        layout.setAdapter(new ToDoAdapter(this));
+        final GridView layout = findViewById(R.id.grid_todo);
+        layout.setAdapter(adapter);
 
         Button menuButton = findViewById(R.id.menu_button_todo);
         menuButton.setOnClickListener(new View.OnClickListener() {
@@ -59,6 +61,19 @@ public class ToDoActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(ToDoActivity.this, ChangeDateActivity.class);
                 startActivity(i);
+            }
+        });
+
+        // Save a todo
+        Button saveToDoButton = findViewById(R.id.save);
+        saveToDoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText inputTodo = (EditText)findViewById(R.id.input_todo);
+                String todo = (inputTodo.getText()).toString();
+                ToDoHandler.setToDoArray(todo,dh.getDay());
+                adapter.notifyDataSetChanged();
+                layout.invalidateViews();
             }
         });
     }

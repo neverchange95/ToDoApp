@@ -17,6 +17,7 @@ public class DayAdapter extends BaseAdapter {
     private View rowView = null;
     private String actualday;
     private DateHandler dh = DateHandler.getInstance();
+    private ToDoHandler toDoHandler = new ToDoHandler();
 
 
     public DayAdapter(Context c, String[] d, String actualDay) {
@@ -53,6 +54,7 @@ public class DayAdapter extends BaseAdapter {
                 @Override
                 public void onClick(View v) {
                     dh.setDay(days[position]); // Setting the choosed day in DateHandler
+                    ToDoAdapter.setToDoAdapterArray(toDoHandler.getToDoArray(days[position])); // Set the arraylist returned from ToDoHandler
                     Intent i = new Intent(context, ToDoActivity.class);
                     context.startActivity(i);
                 }
@@ -66,6 +68,7 @@ public class DayAdapter extends BaseAdapter {
                 @Override
                 public void onClick(View v) {
                     dh.setDay(days[position]); // Setting the choosed day in DateHandler
+                    ToDoAdapter.setToDoAdapterArray(toDoHandler.getToDoArray(days[position])); // Set the arraylist returned from ToDoHandler
                     Intent i = new Intent(context, ToDoActivity.class);
                     context.startActivity(i);
                 }
@@ -82,6 +85,7 @@ public class DayAdapter extends BaseAdapter {
                 @Override
                 public void onClick(View v) {
                     dh.setDay(days[position]); // Setting the choosed day in DateHandler
+                    ToDoAdapter.setToDoAdapterArray(toDoHandler.getToDoArray(days[position])); // Set the arraylist returned from ToDoHandler
                     Intent i = new Intent(context, ToDoActivity.class);
                     context.startActivity(i);
                 }

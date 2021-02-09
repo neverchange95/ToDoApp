@@ -8,32 +8,35 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class ToDoAdapter extends BaseAdapter {
     private Context context;
     private static LayoutInflater inflater2;
     private View rowView2 = null;
     private ToDoAdapterHolder holder = new ToDoAdapterHolder();
+    private static ArrayList<String> toDoCurrentDate;
 
     // Only for testing
-    String[] testInput = {
-            "Schlafen",
-            "Essen",
-            "Programmieren",
-            "Programmieren",
-            "Programmieren",
-            "Programmieren",
-            "Programmieren",
-            "Programmieren",
-            "Programmieren",
-            "Programmieren",
-            "Programmieren",
-            "Programmieren",
-            "Programmieren",
-            "Programmieren",
-            "Programmieren",
-            "Programmieren",
-            "Programmieren",
-    };
+//    String[] testInput = {
+//            "Schlafen",
+//            "Essen",
+//            "Programmieren",
+//            "Programmieren",
+//            "Programmieren",
+//            "Programmieren",
+//            "Programmieren",
+//            "Programmieren",
+//            "Programmieren",
+//            "Programmieren",
+//            "Programmieren",
+//            "Programmieren",
+//            "Programmieren",
+//            "Programmieren",
+//            "Programmieren",
+//            "Programmieren",
+//            "Programmieren",
+//    };
 
     public ToDoAdapter(Context c) {
         super();
@@ -43,12 +46,12 @@ public class ToDoAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return testInput.length;
+        return toDoCurrentDate.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return testInput[position];
+        return toDoCurrentDate.get(position);
     }
 
     @Override
@@ -59,10 +62,19 @@ public class ToDoAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        rowView2 = inflater2.inflate(R.layout.todo,null);
-        holder.check = (Button) rowView2.findViewById(R.id.checkButton);
-        holder.delete = (Button) rowView2.findViewById(R.id.delete_button);
-        holder.todo = (TextView) rowView2.findViewById(R.id.input_todo);
+        if(convertView == null) {
+            rowView2 = inflater2.inflate(R.layout.todo, null);
+            holder.check = (Button) rowView2.findViewById(R.id.checkButton);
+            holder.delete = (Button) rowView2.findViewById(R.id.delete_button);
+            holder.todo = (TextView) rowView2.findViewById(R.id.input_todo);
+        //    holder.todo.setText(toDoCurrentDate.get(position));
+        } else {
+            rowView2 = convertView;
+        }
         return rowView2;
+    }
+
+    public static void setToDoAdapterArray(ArrayList<String> a) {
+        toDoCurrentDate = a;
     }
 }

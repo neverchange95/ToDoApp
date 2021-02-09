@@ -13,13 +13,17 @@ public class DayAdapter extends BaseAdapter {
     private Context context;
     private static LayoutInflater inflater;
     private String[] days;
-    private Holder holder = new Holder();
+    private DayAdapterHolder dayAdapterHolder = new DayAdapterHolder();
     private View rowView = null;
+    private String actualday;
+    private DateHandler dh = DateHandler.getInstance();
 
-    public DayAdapter(Context c, String[] d) {
+
+    public DayAdapter(Context c, String[] d, String actualDay) {
         super();
         this.context = c;
         this.days = d;
+        this.actualday = actualDay;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -39,42 +43,45 @@ public class DayAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         if(days[position].contains("So.")) {
             rowView = inflater.inflate(R.layout.sunday,null);
-            holder.txV = (TextView) rowView.findViewById(R.id.sunday_text);
-            holder.imV = (ImageView) rowView.findViewById(R.id.sunday);
-            holder.txV.setText(days[position]);
-            holder.imV.setOnClickListener(new View.OnClickListener() {
+            dayAdapterHolder.txV = (TextView) rowView.findViewById(R.id.sunday_text);
+            dayAdapterHolder.imV = (ImageView) rowView.findViewById(R.id.sunday);
+            dayAdapterHolder.txV.setText(days[position]);
+            dayAdapterHolder.imV.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    dh.setDay(days[position]); // Setting the choosed day in DateHandler
                     Intent i = new Intent(context, ToDoActivity.class);
                     context.startActivity(i);
                 }
             });
-        } else if(position == 0) {
+        } else if(days[position].equals(actualday)) {
             rowView = inflater.inflate(R.layout.actual_day, null);
-            holder.txV = (TextView) rowView.findViewById(R.id.actual_day_text);
-            holder.imV = (ImageView) rowView.findViewById(R.id.actual_day);
-            holder.txV.setText(days[position]);
-            holder.imV.setOnClickListener(new View.OnClickListener() {
+            dayAdapterHolder.txV = (TextView) rowView.findViewById(R.id.actual_day_text);
+            dayAdapterHolder.imV = (ImageView) rowView.findViewById(R.id.actual_day);
+            dayAdapterHolder.txV.setText(days[position]);
+            dayAdapterHolder.imV.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    dh.setDay(days[position]); // Setting the choosed day in DateHandler
                     Intent i = new Intent(context, ToDoActivity.class);
                     context.startActivity(i);
                 }
             });
         } else {
             rowView = inflater.inflate(R.layout.normal_day,null);
-            holder.txV = (TextView) rowView.findViewById(R.id.normal_day_text);
-            holder.imV = (ImageView) rowView.findViewById(R.id.normal_day);
-            holder.imVBar = (ImageView) rowView.findViewById(R.id.normal_day_bar1);
+            dayAdapterHolder.txV = (TextView) rowView.findViewById(R.id.normal_day_text);
+            dayAdapterHolder.imV = (ImageView) rowView.findViewById(R.id.normal_day);
+            dayAdapterHolder.imVBar = (ImageView) rowView.findViewById(R.id.normal_day_bar1);
             // Bar1 von normal_day anzeigen, ist im xml hided!
-            holder.imVBar.setVisibility(View.VISIBLE);
-            holder.txV.setText(days[position]);
-            holder.imV.setOnClickListener(new View.OnClickListener() {
+            dayAdapterHolder.imVBar.setVisibility(View.VISIBLE);
+            dayAdapterHolder.txV.setText(days[position]);
+            dayAdapterHolder.imV.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    dh.setDay(days[position]); // Setting the choosed day in DateHandler
                     Intent i = new Intent(context, ToDoActivity.class);
                     context.startActivity(i);
                 }

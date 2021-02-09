@@ -21,8 +21,7 @@ import java.util.Date;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
-    private DateHolder holder = new DateHolder();
-    private DateHandler dh;
+    private DateHandler dh = DateHandler.getInstance();
     private TextView day;
     private TextView month;
     private TextView year;
@@ -36,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
         this.month = findViewById(R.id.month);
         this.year = findViewById(R.id.year);
 
-        this.dh = holder.getDateHandler();
         day.setText(dh.getDay());
         month.setText(dh.getMonth());
         year.setText(dh.getYear());
@@ -44,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
         String[] days = dh.getAllDaysFormatted(); // get array with all days of the current month formatted like Mo. 01 from class DateHandler
         GridView layout = findViewById(R.id.grid);
-        layout.setAdapter(new DayAdapter(this, days));
+        layout.setAdapter(new DayAdapter(this, days,dh.getDay()));
 
 
         ImageView calendar = findViewById(R.id.calendar_background);

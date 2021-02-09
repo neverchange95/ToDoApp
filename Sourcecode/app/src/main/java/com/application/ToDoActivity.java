@@ -11,8 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class ToDoActivity extends AppCompatActivity {
-    private DateHolder holder = new DateHolder();
-    private DateHandler dh;
+    private DateHandler dh = DateHandler.getInstance();
     private TextView day;
     private TextView month;
     private TextView year;
@@ -26,10 +25,13 @@ public class ToDoActivity extends AppCompatActivity {
         this.month = findViewById(R.id.month);
         this.year = findViewById(R.id.year);
 
-        this.dh = holder.getDateHandler();
         day.setText(dh.getDay());
         month.setText(dh.getMonth());
         year.setText(dh.getYear());
+
+
+
+
 
         GridView layout = findViewById(R.id.grid_todo);
         layout.setAdapter(new ToDoAdapter(this));

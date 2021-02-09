@@ -1,20 +1,17 @@
 package com.application;
 
-import android.widget.CalendarView;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 /**
  * @author neverchange95
  * @version 08/02/21
- * @see DateHolder this class holds only one object of this class
  *
  * This class handles the different date-formats. It translate the english return values from the system to german values.
  */
 
 public class DateHandler {
+    private static DateHandler instance; // Save the instance of the DateHandler
 //    private CalendarView cv;
     private int year;
     private String month;
@@ -38,7 +35,20 @@ public class DateHandler {
 //        this.day = date.substring(date.lastIndexOf('/')+1);
 //    }
 
-    public DateHandler() {
+    /**
+     * @return DateHandler: An instance of the calendar object. Is a singleton pattern
+     */
+    static public DateHandler getInstance() {
+        if(instance == null) {
+            instance = new DateHandler();
+        }
+        return instance;
+    }
+
+    /**
+     * The constructor DateHandler calculates the different String values for the actual dayS
+     */
+    private DateHandler() {
         SimpleDateFormat d = new SimpleDateFormat("EEEE, dd/MM/yyyy"); // set a format to get the actual day
         SimpleDateFormat d2 = new SimpleDateFormat("EEEE"); // set a format to only get the actual day in words
         String date = d.format(Calendar.getInstance().getTime()); // returns the actual day in this format: 08/02/2021
@@ -48,10 +58,11 @@ public class DateHandler {
         this.month = getMonthInWords(date.substring(date.indexOf('/')+1, date.lastIndexOf('/'))); // set variable month to: Februar
         this.year = Integer.parseInt(date.substring(date.lastIndexOf('/')+1)); // set variable year to: 2021
 
-        Calendar calendar = GregorianCalendar.getInstance();
+        Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.YEAR,year); // Set the year
         calendar.set(Calendar.MONTH,monthInt); // Set the Month beginning by 0 (January = 0, December = 11)
         numberOfDays = calendar.getActualMaximum(Calendar.DAY_OF_MONTH); // Get number of days in choosed year and month
+        calendar.set(Calendar.DAY_OF_MONTH,1); // Set here the first day of month, it´s important because otherwise the calendar calculate the first day from actual day
         fistDayInMonth = calendar.get(Calendar.DAY_OF_WEEK); // Get the first day in the month as int MO=2, DI=3, MI=4, DO=5, FR=6, SA=7, SO=1
 
 
@@ -59,10 +70,10 @@ public class DateHandler {
         System.out.println("Der Februar hat " + numberOfDays + " Tage!!!!!!!!!!!!!!!!!!!!!!!!!");
     }
 
+
     /**
      * @return days[]: returns all days in the actual month formatted like Mo. 01
      */
-
     public String[] getAllDaysFormatted() {
         String[] days = new String[numberOfDays]; // return array
         String[] dayIndex = {"So. ", "Mo. ", "Di. ", "Mi. ", "Do. ", "Fr. ", "Sa. "}; // values for index position
@@ -88,7 +99,7 @@ public class DateHandler {
     public static String getDayInGerman(String day) {
         if("Monday".equals(day)) {
             return "Mo. ";
-        } else if("Thuesday".equals(day)) {
+        } else if("Tuesday".equals(day)) {
             return "Di. ";
         } else if("Wednesday".equals(day)) {
             return "Mi. ";
@@ -157,27 +168,50 @@ public class DateHandler {
         }
     }
 
-
-
+    // Getters
     /**
-     * @return year as a String
+     * @return year as a String: 2021
      */
     public String getYear() {
         return this.year+"";
     }
 
     /**
-     * @return month as a String
+     * @return month as a String: Februar
      */
     public String getMonth() {
         return this.month;
     }
 
     /**
-     * @return day as a String
+     * @return day as a String: Di. 09
      */
     public String getDay() {
         return this.day;
+    }
+
+
+    // Setters
+    /**
+     * @param year as a String: 2021
+     */
+    public void setYear(String year) {
+        int y = Integer.parseInt(year);
+        this.year = y;
+    }
+
+    /**
+     * @param month as a String: Februar
+     */
+    public void setMonth(String month) {
+        this.month = month;
+    }
+
+    /**
+     * @param day as a String: Di. 09
+     */
+    public void setDay(String day) {
+        this.day = day;
     }
 
 }

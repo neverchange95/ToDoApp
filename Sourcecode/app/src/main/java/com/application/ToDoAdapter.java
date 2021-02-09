@@ -12,7 +12,7 @@ public class ToDoAdapter extends BaseAdapter {
     private Context context;
     private static LayoutInflater inflater2;
     private View rowView2 = null;
-    private Holder2 h2 = new Holder2();
+    private ToDoAdapterHolder holder = new ToDoAdapterHolder();
 
     // Only for testing
     String[] testInput = {
@@ -56,22 +56,13 @@ public class ToDoAdapter extends BaseAdapter {
         return 0;
     }
 
-    class Holder2 {
-        public TextView todo;
-        public Button delete;
-        public Button check;
-
-        public Holder2() {
-            // empty
-        }
-    }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         rowView2 = inflater2.inflate(R.layout.todo,null);
-        h2.check = (Button) rowView2.findViewById(R.id.checkButton);
-        h2.delete = (Button) rowView2.findViewById(R.id.delete_button);
-        h2.todo = (TextView) rowView2.findViewById(R.id.input_todo);
+        holder.check = (Button) rowView2.findViewById(R.id.checkButton);
+        holder.delete = (Button) rowView2.findViewById(R.id.delete_button);
+        holder.todo = (TextView) rowView2.findViewById(R.id.input_todo);
         return rowView2;
     }
 }

@@ -1,17 +1,17 @@
 package com.application;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class ToDoHandler {
     private DateHandler dateHandler = DateHandler.getInstance();
+    private HashMap<String, ArrayList<String>> monthToDos = new HashMap<>();
 
     // Jeder Tag bekommt ein eigenes Array mit den Todos
     // Die MainActivity soll immer nur den aktuellen Monat anzeigen -> Die ToDoArrays für den aktuellen monat müssen lokal auf dem Smartphone liegen
     // Wählt der Benutzer über den Kalender einen anderen Monat bzw. Jahr aus, soll nur das jeweilige Array für die Todos des ausgewählten Tag/Monat/Jahr angzeigt werden
 
     // Idee: HashMap mit key=Datum, value=todoarray
-
-
-
-
 
 
 

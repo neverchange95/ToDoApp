@@ -29,7 +29,6 @@ public class ToDoHandler {
         ArrayList<String> toDoList = monthToDos.get(key);
         toDoList.add(todo);
         monthToDos.put(key,toDoList);
-        System.out.println(monthToDos.get(key));
     }
 
 

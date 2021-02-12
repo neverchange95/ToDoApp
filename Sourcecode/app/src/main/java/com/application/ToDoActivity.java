@@ -17,6 +17,8 @@ public class ToDoActivity extends AppCompatActivity {
     private TextView day;
     private TextView month;
     private TextView year;
+    private static ToDoAdapter adapter;
+    private static GridView layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,10 +34,10 @@ public class ToDoActivity extends AppCompatActivity {
         year.setText(dh.getYear());
 
 
-        final ToDoAdapter adapter = new ToDoAdapter(this);
+        adapter = new ToDoAdapter(this);
 
 
-        final GridView layout = findViewById(R.id.grid_todo);
+        layout = findViewById(R.id.grid_todo);
         layout.setAdapter(adapter);
 
         Button menuButton = findViewById(R.id.menu_button_todo);
@@ -55,6 +57,7 @@ public class ToDoActivity extends AppCompatActivity {
             }
         });
 
+        // user click the calender background --> change to calender view
         ImageView calendar = findViewById(R.id.calendar_background);
         calendar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,6 +66,19 @@ public class ToDoActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+
+        // clear the placeholder if user click on the input field
+        final EditText inputTodo = (EditText)findViewById(R.id.input_todo);
+        inputTodo.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus) {
+                    inputTodo.getText().clear();
+                }
+            }
+        });
+
 
         // Save a todo
         Button saveToDoButton = findViewById(R.id.save);
@@ -74,7 +90,15 @@ public class ToDoActivity extends AppCompatActivity {
                 ToDoHandler.setToDoArray(todo,dh.getDay());
                 adapter.notifyDataSetChanged();
                 layout.invalidateViews();
+                layout.setAdapter(adapter);
             }
         });
+    }
+
+    // This Method is called in ToDoAdapter
+    public static void refreshLayout() {
+        adapter.notifyDataSetChanged();
+        layout.invalidateViews();
+        layout.setAdapter(adapter);
     }
 }

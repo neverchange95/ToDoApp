@@ -54,7 +54,7 @@ public class DateHandler {
         String date = d.format(Calendar.getInstance().getTime()); // returns the actual day in this format: 08/02/2021
 
         this.dayInEng = d2.format(Calendar.getInstance().getTime()); // get the actual day in format d2: example(Monday)
-        this.day = getDayInGerman(dayInEng) + date.substring(date.indexOf(' ')+1, date.indexOf('/')); // set variable day to: Mo. 08
+        this.day = getDayFormatted(dayInEng) + date.substring(date.indexOf(' ')+1, date.indexOf('/')); // set variable day to: Mo. 08
         this.month = getMonthInWords(date.substring(date.indexOf('/')+1, date.lastIndexOf('/'))); // set variable month to: Februar
         this.year = Integer.parseInt(date.substring(date.lastIndexOf('/')+1)); // set variable year to: 2021
 
@@ -96,20 +96,21 @@ public class DateHandler {
      * @param  day: is the actual day in this week. The value goes from Monday to Sunday
      * @return day: is the actual day in this week but now in german and shorter. Returns Mo. to So.
      */
-    public static String getDayInGerman(String day) {
-        if("Monday".equals(day)) {
+    public static String getDayFormatted(String day) {
+        System.out.println(day);
+        if("Monday".equals(day) || "Montag".equals(day)) {
             return "Mo. ";
-        } else if("Tuesday".equals(day)) {
+        } else if("Tuesday".equals(day) || "Dienstag".equals(day)) {
             return "Di. ";
-        } else if("Wednesday".equals(day)) {
+        } else if("Wednesday".equals(day) || "Mittwoch".equals(day)) {
             return "Mi. ";
-        } else if("Thursday".equals(day)) {
+        } else if("Thursday".equals(day) || "Donnerstag".equals(day)) {
             return "Do. ";
-        } else if("Friday".equals(day)) {
+        } else if("Friday".equals(day) || "Freitag".equals(day)) {
             return "Fr. ";
-        } else if("Saturday".equals(day)) {
+        } else if("Saturday".equals(day) || "Samstag".equals(day)) {
             return "Sa. ";
-        } else if("Sunday".equals(day)) {
+        } else if("Sunday".equals(day) || "Sonntag".equals(day)) {
             return "So. ";
         } else {
             return "Undefined Day!";

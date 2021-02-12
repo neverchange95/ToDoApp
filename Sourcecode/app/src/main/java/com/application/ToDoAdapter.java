@@ -1,9 +1,11 @@
 package com.application;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
@@ -14,29 +16,10 @@ public class ToDoAdapter extends BaseAdapter {
     private Context context;
     private static LayoutInflater inflater2;
     private View rowView2 = null;
-    private ToDoAdapterHolder holder = new ToDoAdapterHolder();
     private static ArrayList<String> toDoCurrentDate;
+    private ArrayList<ToDoAdapterHolder> todoElements = new ArrayList<>();
+    ToDoAdapter adapter;
 
-    // Only for testing
-//    String[] testInput = {
-//            "Schlafen",
-//            "Essen",
-//            "Programmieren",
-//            "Programmieren",
-//            "Programmieren",
-//            "Programmieren",
-//            "Programmieren",
-//            "Programmieren",
-//            "Programmieren",
-//            "Programmieren",
-//            "Programmieren",
-//            "Programmieren",
-//            "Programmieren",
-//            "Programmieren",
-//            "Programmieren",
-//            "Programmieren",
-//            "Programmieren",
-//    };
 
     public ToDoAdapter(Context c) {
         super();
@@ -61,19 +44,44 @@ public class ToDoAdapter extends BaseAdapter {
 
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, final View convertView, ViewGroup parent) {
+        // Problem:
         if(convertView == null) {
+            adapter = this;
+            todoElements.add(new ToDoAdapterHolder());
             rowView2 = inflater2.inflate(R.layout.todo, null);
-            holder.check = (Button) rowView2.findViewById(R.id.checkButton);
-            holder.delete = (Button) rowView2.findViewById(R.id.delete_button);
-            holder.todo = (TextView) rowView2.findViewById(R.id.input_todo);
-        //    holder.todo.setText(toDoCurrentDate.get(position));
+            todoElements.get(position).check = rowView2.findViewById(R.id.checkButton);
+            todoElements.get(position).delete = rowView2.findViewById(R.id.delete_button);
+            todoElements.get(position).todo = rowView2.findViewById(R.id.textToDo);
+            todoElements.get(position).todo.setText(toDoCurrentDate.get(position));
+
+            // set flag to cross out the element
+            todoElements.get(position).check.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    todoElements.get(position).todo.setPaintFlags(todoElements.get(position).todo.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                }
+            });
+
+            // delete a todo
+            todoElements.get(position).delete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    System.out.println(position);
+                    todoElements.remove(position);
+                    toDoCurrentDate.remove(position);
+                    ToDoActivity.refreshLayout();
+                }
+            });
+
+
         } else {
             rowView2 = convertView;
         }
         return rowView2;
     }
 
+    // this method is called in DayAdapter
     public static void setToDoAdapterArray(ArrayList<String> a) {
         toDoCurrentDate = a;
     }

@@ -5,7 +5,7 @@
     <string name="day_value">Mo. 01</string>
     <string name="appName">TODO</string>
     <string name="day_input">Mo. 01</string>
-    <string name="input_string">What have you to do? \nInput it here...</string>
+    <string name="input_string">Was hast du zu tun?</string>
     <string name="title_activity_notification">NotificationActivity</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>

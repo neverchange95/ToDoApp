@@ -18,7 +18,7 @@ public class ToDoAdapter extends BaseAdapter {
     private View rowView2 = null;
     private static ArrayList<String> toDoCurrentDate;
     private ArrayList<ToDoAdapterHolder> todoElements = new ArrayList<>();
-    ToDoAdapter adapter;
+    private ToDoAdapter adapter;
 
 
     public ToDoAdapter(Context c) {
@@ -45,7 +45,6 @@ public class ToDoAdapter extends BaseAdapter {
 
     @Override
     public View getView(final int position, final View convertView, ViewGroup parent) {
-        // Problem:
         if(convertView == null) {
             adapter = this;
             todoElements.add(new ToDoAdapterHolder());
@@ -53,12 +52,21 @@ public class ToDoAdapter extends BaseAdapter {
             todoElements.get(position).check = rowView2.findViewById(R.id.checkButton);
             todoElements.get(position).delete = rowView2.findViewById(R.id.delete_button);
             todoElements.get(position).todo = rowView2.findViewById(R.id.textToDo);
-            todoElements.get(position).todo.setText(toDoCurrentDate.get(position));
+
+            // crossing out the string, if the task is done
+            if(toDoCurrentDate.get(position).contains(",DONE")) {
+                String task = toDoCurrentDate.get(position).substring(0,toDoCurrentDate.get(position).indexOf(",DONE"));
+                todoElements.get(position).todo.setText(task);
+                todoElements.get(position).todo.setPaintFlags(todoElements.get(position).todo.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            } else {
+                todoElements.get(position).todo.setText(toDoCurrentDate.get(position));
+            }
 
             // set flag to cross out the element
             todoElements.get(position).check.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    toDoCurrentDate.set(position, toDoCurrentDate.get(position) + ",DONE"); // Setting a Flag into to the array, if the task is done
                     todoElements.get(position).todo.setPaintFlags(todoElements.get(position).todo.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
                 }
             });
@@ -73,8 +81,6 @@ public class ToDoAdapter extends BaseAdapter {
                     ToDoActivity.refreshLayout();
                 }
             });
-
-
         } else {
             rowView2 = convertView;
         }

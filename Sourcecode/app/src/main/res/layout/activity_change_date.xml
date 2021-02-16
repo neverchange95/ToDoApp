@@ -82,7 +82,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="236dp"
         android:fontFamily="@font/arialr"
-        android:text="Choose your Date:"
+        android:text="@string/w_hle_ein_datum"
         android:textColor="#78B7FF"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -94,9 +94,37 @@
         android:layout_height="406dp"
         android:layout_marginTop="24dp"
         android:background="#FFFFFF"
+        android:unfocusedMonthDateColor="#650F0F"
+        android:weekNumberColor="#6C5E5E"
+        android:weekSeparatorLineColor="#322F2F"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <Button
+        android:id="@+id/button_to_todo"
+        android:layout_width="39dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="28dp"
+        android:background="@drawable/done"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/done" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="28dp"
+        android:fontFamily="@font/arialr"
+        android:text="@string/zum_todo"
+        android:textColor="#78B7FF"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/button_to_todo"
+        tools:ignore="SmallSp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -123,7 +123,7 @@ public class DateHandler {
      * The static variable monthInt is to get the number of days from the Class Calendar or GregorianCalendar.
      */
     public static String getMonthInWords(String month) {
-        if(month.matches("[0-9]{2}")) {
+        if(month.matches("[0-9]{2}") || month.matches("[0-9]")) {
             int m = Integer.parseInt(month);
             if(m == 1) {
                 monthInt = m-1;

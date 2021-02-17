@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    tools:context=".ShowPastToDoActivity">
+
+    <Button
+        android:id="@+id/menu_button_todo"
+        android:layout_width="61dp"
+        android:layout_height="58dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="241dp"
+        android:background="@drawable/menu_button"
+        app:layout_constraintEnd_toEndOf="@+id/calendar_background"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/calendar_background"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:contentDescription="@string/appName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/background_calender" />
+
+    <TextView
+        android:id="@+id/year"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/impact"
+        android:includeFontPadding="false"
+        android:text="@string/year_value"
+        android:textColor="#78FFED"
+        android:textSize="35sp"
+        app:layout_constraintEnd_toEndOf="@+id/calendar_background"
+        app:layout_constraintStart_toStartOf="@+id/calendar_background"
+        app:layout_constraintTop_toTopOf="@+id/calendar_background" />
+
+    <TextView
+        android:id="@+id/month"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:fontFamily="@font/impact"
+        android:includeFontPadding="false"
+        android:text="@string/month_value"
+        android:textColor="#78FFED"
+        android:textSize="35sp"
+        app:layout_constraintEnd_toEndOf="@+id/calendar_background"
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toStartOf="@+id/calendar_background"
+        app:layout_constraintTop_toTopOf="@+id/calendar_background" />
+
+    <TextView
+        android:id="@+id/day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="124dp"
+        android:fontFamily="@font/impact"
+        android:includeFontPadding="false"
+        android:text="@string/day_value"
+        android:textColor="#78FFED"
+        android:textSize="35sp"
+        app:layout_constraintEnd_toEndOf="@+id/calendar_background"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="@+id/calendar_background"
+        app:layout_constraintTop_toTopOf="@+id/calendar_background" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="456dp"
+        android:layout_height="692dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/calendar_background"
+        app:srcCompat="@drawable/to_do_rectangle" />
+
+    <GridView
+        android:id="@+id/grid_todo"
+        android:layout_width="410dp"
+        android:layout_height="473dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/imageView6"
+        app:layout_constraintTop_toTopOf="@+id/imageView6" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

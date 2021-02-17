@@ -83,12 +83,10 @@ public class ChangeDateActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Problem: aktuelles Jahr und Monat muss behalten werden. Swicht der user zurück auf die main, bleibt das gewählte jahr und monat gesetzt.
-//                dateHandler.setDay(choosedDay);
-//                dateHandler.setMonth(choosedMonth);
-//                dateHandler.setYear(choosedYear);
                 ToDoHandler handler = new ToDoHandler("test");
                 ToDoAdapter.setToDoAdapterArray(handler.getCalendarChoosedTodos());
-                Intent i = new Intent(ChangeDateActivity.this, ToDoActivity.class);
+                Intent i = new Intent(ChangeDateActivity.this, ShowPastToDoActivity.class);
+                ShowPastToDoActivity.ChoosedDateClass t = new ShowPastToDoActivity.ChoosedDateClass(choosedDay,choosedMonth,choosedYear);
                 startActivity(i);
             }
         });

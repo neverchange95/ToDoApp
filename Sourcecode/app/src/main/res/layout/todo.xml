@@ -13,6 +13,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/check_button_6"
+        app:backgroundTint="@null"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -23,6 +24,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/delete"
+        app:backgroundTint="@null"
         app:layout_constraintStart_toEndOf="@+id/checkButton"
         app:layout_constraintTop_toTopOf="parent" />
 

@@ -12,7 +12,7 @@ public class ShowPastToDoActivity extends AppCompatActivity {
     private TextView day;
     private TextView month;
     private TextView year;
-    private static ToDoAdapter adapter;
+    private static PastToDoAdapter adapter;
     private static GridView layout;
 
     public static class ChoosedDateClass {
@@ -48,11 +48,10 @@ public class ShowPastToDoActivity extends AppCompatActivity {
         this.month.setText(ChoosedDateClass.getMonth());
         this.year.setText(ChoosedDateClass.getYear());
 
-        // TODO: Create a new adapter for this and not use the TodoAdapter!
-        adapter = new ToDoAdapter(this);
+        adapter = new PastToDoAdapter(this);
 
 
-        layout = findViewById(R.id.grid_todo);
+        layout = findViewById(R.id.grid_past_todo);
         layout.setAdapter(adapter);
 
 

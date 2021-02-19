@@ -16,6 +16,7 @@
         android:layout_marginEnd="241dp"
         android:background="@drawable/menu_button"
         app:layout_constraintEnd_toEndOf="@+id/calendar_background"
+        app:backgroundTint="@null"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -108,6 +109,7 @@
         android:layout_marginTop="52dp"
         android:layout_marginEnd="28dp"
         android:background="@drawable/done"
+        app:backgroundTint="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/done" />

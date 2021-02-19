@@ -52,6 +52,8 @@ public class ToDoActivity extends AppCompatActivity {
         notificationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                EditText input = (EditText)findViewById(R.id.input_todo);
+                NotificationActivity.setToDoInput(input.getText().toString());
                 Intent i = new Intent(ToDoActivity.this, NotificationActivity.class);
                 startActivity(i);
             }

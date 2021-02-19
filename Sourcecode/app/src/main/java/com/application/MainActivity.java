@@ -2,11 +2,17 @@ package com.application;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.media.Image;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.PowerManager;
 import android.os.TestLooperManager;
+import android.provider.Settings;
 import android.view.View;
 import android.widget.CalendarView;
 import android.widget.GridLayout;
@@ -21,6 +27,7 @@ import java.util.Date;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
+    public static String MyPREFERENCES = "MyPREFERENCES";
     private DateHandler dh = DateHandler.getInstance();
     private TextView day;
     private TextView month;

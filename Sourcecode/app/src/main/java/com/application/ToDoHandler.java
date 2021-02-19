@@ -7,7 +7,6 @@ import java.util.HashMap;
 public class ToDoHandler {
     private DateHandler dateHandler = DateHandler.getInstance();
     private static HashMap<String, ArrayList<String>> monthToDos = new HashMap<>(); // all months and them tasks for the actual month
-    private static ArrayList<String> calendarChoosedTodos = new ArrayList<>(); // the tasks for the day which was choosed in the calendar
 
     // Jeder Tag bekommt ein eigenes Array mit den Todos
     // Die MainActivity soll immer nur den aktuellen Monat anzeigen -> Die ToDoArrays für den aktuellen monat müssen lokal auf dem Smartphone liegen
@@ -23,19 +22,7 @@ public class ToDoHandler {
         }
     }
 
-    public ToDoHandler(String date) {
-        // adding the tasks for the choosed day from calendar here (get it from sql database)
-        for(int i = 0; i < 3; i++) {
-            // only for testing
-            calendarChoosedTodos.add("Test " + i);
-        }
-    }
 
-
-
-    public ArrayList<String> getCalendarChoosedTodos() {
-        return calendarChoosedTodos;
-    }
 
 
     public ArrayList<String> getToDoArray(String key) {

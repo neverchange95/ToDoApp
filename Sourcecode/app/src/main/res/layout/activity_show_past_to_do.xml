@@ -15,6 +15,7 @@
         android:layout_marginTop="52dp"
         android:layout_marginEnd="241dp"
         android:background="@drawable/menu_button"
+        app:backgroundTint="@null"
         app:layout_constraintEnd_toEndOf="@+id/calendar_background"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -85,7 +86,7 @@
         app:srcCompat="@drawable/to_do_rectangle" />
 
     <GridView
-        android:id="@+id/grid_todo"
+        android:id="@+id/grid_past_todo"
         android:layout_width="410dp"
         android:layout_height="473dp"
         android:layout_marginStart="32dp"

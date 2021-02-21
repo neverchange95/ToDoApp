@@ -34,6 +34,7 @@ public class ToDoActivity extends AppCompatActivity {
         year.setText(dh.getYear());
 
 
+
         adapter = new ToDoAdapter(this);
 
 
@@ -44,6 +45,7 @@ public class ToDoActivity extends AppCompatActivity {
         menuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                MainActivity.refreshMainLayout();
                 finish(); // go back to overview (MainActivity)
             }
         });

@@ -58,7 +58,11 @@ public class NotificationActivity extends AppCompatActivity {
             @NonNull
             @Override
             public String getFormattedValue(float value) {
-                return ((int) value) + " Uhr";
+                if((int) value == 1) {
+                    return ((int) value) + " Stunde";
+                } else {
+                    return ((int) value) + " Stunden";
+                }
             }
         });
 

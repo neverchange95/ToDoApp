@@ -20,7 +20,9 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -32,11 +34,21 @@ public class MainActivity extends AppCompatActivity {
     private TextView day;
     private TextView month;
     private TextView year;
+    private static DayAdapter adapter;
+    private static GridView layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.overview);
+
+        // Create a new connection to database
+        try {
+            new MySQLConnection();
+            Toast.makeText(this,"Verbindung zur Datenbank war erfolgreich!",Toast.LENGTH_SHORT).show();
+        } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
 
         this.day = findViewById(R.id.day);
         this.month = findViewById(R.id.month);
@@ -48,8 +60,9 @@ public class MainActivity extends AppCompatActivity {
 
 
         String[] days = dh.getAllDaysFormatted(); // get array with all days of the current month formatted like Mo. 01 from class DateHandler
-        GridView layout = findViewById(R.id.grid);
-        layout.setAdapter(new DayAdapter(this, days,dh.getDay()));
+        adapter = new DayAdapter(this,days,dh.getDay());
+        layout = findViewById(R.id.grid);
+        layout.setAdapter(adapter);
 
 
         ImageView calendar = findViewById(R.id.calendar_background);
@@ -60,5 +73,12 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+    }
+
+    // This method is called in ToDOActivity in menuButton, to refreshing the ToDoBars
+    public static void refreshMainLayout() {
+        adapter.notifyDataSetChanged();
+        layout.invalidateViews();
+        layout.setAdapter(adapter);
     }
 }

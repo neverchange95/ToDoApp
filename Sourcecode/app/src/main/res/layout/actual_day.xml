@@ -39,6 +39,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="71dp"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="@+id/actual_day"
         app:layout_constraintStart_toStartOf="@+id/actual_day"
         app:layout_constraintTop_toTopOf="@+id/actual_day"
@@ -49,6 +50,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="@+id/actual_day"
         app:layout_constraintStart_toStartOf="@+id/actual_day"
         app:layout_constraintTop_toTopOf="@+id/actual_day_bar1"
@@ -59,9 +61,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="@+id/actual_day"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="@+id/actual_day"
         app:layout_constraintTop_toBottomOf="@+id/actual_day_text"
         app:srcCompat="@drawable/rechteck_61" />
+
+    <ImageView
+        android:id="@+id/empty_todolist"
+        android:layout_width="79dp"
+        android:layout_height="32dp"
+        app:layout_constraintBottom_toBottomOf="@+id/actual_day_bar3"
+        app:layout_constraintEnd_toEndOf="@+id/actual_day"
+        android:visibility="invisible"
+        app:layout_constraintHorizontal_bias="0.45"
+        app:layout_constraintStart_toStartOf="@+id/actual_day"
+        app:layout_constraintTop_toTopOf="@+id/actual_day_bar1"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/empty" />
 </androidx.constraintlayout.widget.ConstraintLayout>

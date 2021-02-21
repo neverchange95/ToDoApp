@@ -20,6 +20,7 @@ public class DateHandler {
     private int numberOfDays;
     private static int monthInt;
     private int fistDayInMonth;
+    private static ActualDate actualDate;
 
 
 
@@ -57,6 +58,8 @@ public class DateHandler {
         this.day = getDayFormatted(dayInEng) + date.substring(date.indexOf(' ')+1, date.indexOf('/')); // set variable day to: Mo. 08
         this.month = getMonthInWords(date.substring(date.indexOf('/')+1, date.lastIndexOf('/'))); // set variable month to: Februar
         this.year = Integer.parseInt(date.substring(date.lastIndexOf('/')+1)); // set variable year to: 2021
+
+        actualDate = new ActualDate(this.year+"",this.month,this.day);
 
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.YEAR,year); // Set the year
@@ -215,4 +218,7 @@ public class DateHandler {
         this.day = day;
     }
 
+    public static ActualDate getActualDate() {
+        return actualDate;
+    }
 }

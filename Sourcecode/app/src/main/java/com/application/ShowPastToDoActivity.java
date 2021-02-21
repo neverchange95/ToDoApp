@@ -44,9 +44,20 @@ public class ShowPastToDoActivity extends AppCompatActivity {
         this.month = findViewById(R.id.month);
         this.year = findViewById(R.id.year);
 
-        this.day.setText(ChoosedDateClass.getDay());
-        this.month.setText(ChoosedDateClass.getMonth());
-        this.year.setText(ChoosedDateClass.getYear());
+        String choosedDay = ChoosedDateClass.getDay();
+        String choosedMonth = ChoosedDateClass.getMonth();
+        String choosedYear = ChoosedDateClass.getYear();
+
+        if(choosedDay==null && choosedMonth==null && choosedYear==null) {
+            this.day.setText(DateHandler.getActualDate().getDay());
+            this.month.setText(DateHandler.getActualDate().getMonth());
+            this.year.setText(DateHandler.getActualDate().getYear());
+        } else {
+            this.day.setText(ChoosedDateClass.getDay());
+            this.month.setText(ChoosedDateClass.getMonth());
+            this.year.setText(ChoosedDateClass.getYear());
+        }
+
 
         adapter = new PastToDoAdapter(this);
 
@@ -62,7 +73,6 @@ public class ShowPastToDoActivity extends AppCompatActivity {
                 finish(); // go back to overview (MainActivity)
             }
         });
-
-
     }
+
 }

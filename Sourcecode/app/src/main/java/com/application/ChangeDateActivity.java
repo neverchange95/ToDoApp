@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.TextView;
 
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -21,6 +22,7 @@ public class ChangeDateActivity extends AppCompatActivity {
     private String choosedYear;
     CalendarView cv;
     DateHandler dh = DateHandler.getInstance();
+    ActualDate actualDate = DateHandler.getActualDate();
     TextView day2;
     TextView month2;
     TextView year2;
@@ -35,9 +37,9 @@ public class ChangeDateActivity extends AppCompatActivity {
         this.month2 = findViewById(R.id.month);
         this.year2 = findViewById(R.id.year);
 
-        day2.setText(dh.getDay());
-        month2.setText(dh.getMonth());
-        year2.setText(dh.getYear());
+        day2.setText(actualDate.getDay());
+        month2.setText(actualDate.getMonth());
+        year2.setText(actualDate.getYear());
 
 
 
@@ -82,9 +84,13 @@ public class ChangeDateActivity extends AppCompatActivity {
             // TODO: Wenn ein Datum aus dem aktuellen Monat aufgerufen wird, muss auf die ArrayList aus der HashMap dieses Monats zurück gegriffen werden und nicht das calendarChoosedTodos aufgerufen werden!
             @Override
             public void onClick(View v) {
-                // Problem: aktuelles Jahr und Monat muss behalten werden. Swicht der user zurück auf die main, bleibt das gewählte jahr und monat gesetzt.
                 PastToDoHandler handler = new PastToDoHandler("test");
                 PastToDoAdapter.setToDoAdapterArray(handler.getCalendarChoosedTodos());
+                try {
+                    handler.testDB();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
                 Intent i = new Intent(ChangeDateActivity.this, ShowPastToDoActivity.class);
                 ShowPastToDoActivity.ChoosedDateClass t = new ShowPastToDoActivity.ChoosedDateClass(choosedDay,choosedMonth,choosedYear);
                 startActivity(i);

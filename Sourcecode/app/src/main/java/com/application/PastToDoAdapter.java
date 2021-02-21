@@ -62,6 +62,9 @@ public class PastToDoAdapter extends BaseAdapter {
 
     // this method is called in ChangeDateActivity
     public static void setToDoAdapterArray(ArrayList<String> a) {
+        for(int i = 0; i < a.size(); i++) {
+            System.out.println(a.get(i));
+        }
         toDoPast = a;
     }
 }

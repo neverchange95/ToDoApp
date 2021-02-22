@@ -10,6 +10,9 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 public class ToDoAdapter extends BaseAdapter {
@@ -17,8 +20,10 @@ public class ToDoAdapter extends BaseAdapter {
     private static LayoutInflater inflater2;
     private View rowView2 = null;
     private static ArrayList<String> toDoCurrentDate;
+    private static String choosedDay;
     private ArrayList<ToDoAdapterHolder> todoElements = new ArrayList<>();
     private ToDoAdapter adapter;
+
 
 
     public ToDoAdapter(Context c) {
@@ -67,6 +72,11 @@ public class ToDoAdapter extends BaseAdapter {
                 @Override
                 public void onClick(View v) {
                     toDoCurrentDate.set(position, toDoCurrentDate.get(position) + ",DONE"); // Setting a Flag into to the array, if the task is done
+                    try {
+                        ToDoHandler.updateDB(toDoCurrentDate.get(position), choosedDay);
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
                     todoElements.get(position).todo.setPaintFlags(todoElements.get(position).todo.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
                 }
             });
@@ -77,6 +87,11 @@ public class ToDoAdapter extends BaseAdapter {
                 public void onClick(View v) {
                     System.out.println(position);
                     todoElements.remove(position);
+                    try {
+                        ToDoHandler.deleteToDoInDB(toDoCurrentDate.get(position), choosedDay);
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
                     toDoCurrentDate.remove(position);
                     ToDoActivity.refreshLayout();
                 }
@@ -88,7 +103,8 @@ public class ToDoAdapter extends BaseAdapter {
     }
 
     // this method is called in DayAdapter
-    public static void setToDoAdapterArray(ArrayList<String> a) {
+    public static void setToDoAdapterArray(ArrayList<String> a, String d) {
         toDoCurrentDate = a;
+        choosedDay = d;
     }
 }

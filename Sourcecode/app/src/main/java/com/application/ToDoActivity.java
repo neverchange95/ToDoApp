@@ -12,6 +12,8 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.sql.SQLException;
+
 public class ToDoActivity extends AppCompatActivity {
     private DateHandler dh = DateHandler.getInstance();
     private TextView day;
@@ -91,7 +93,11 @@ public class ToDoActivity extends AppCompatActivity {
             public void onClick(View v) {
                 EditText inputTodo = (EditText)findViewById(R.id.input_todo);
                 String todo = (inputTodo.getText()).toString();
-                ToDoHandler.setToDoArray(todo,dh.getDay());
+                try {
+                    ToDoHandler.setToDoArray(todo,dh.getDay());
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
                 adapter.notifyDataSetChanged();
                 layout.invalidateViews();
                 layout.setAdapter(adapter);

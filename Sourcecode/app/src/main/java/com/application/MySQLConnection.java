@@ -25,5 +25,4 @@ public class MySQLConnection {
     public static Connection getConnection() {
         return connection;
     }
-
 }

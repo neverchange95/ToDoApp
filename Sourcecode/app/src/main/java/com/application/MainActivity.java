@@ -60,7 +60,11 @@ public class MainActivity extends AppCompatActivity {
 
 
         String[] days = dh.getAllDaysFormatted(); // get array with all days of the current month formatted like Mo. 01 from class DateHandler
-        adapter = new DayAdapter(this,days,dh.getDay());
+        try {
+            adapter = new DayAdapter(this,days,dh.getDay());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         layout = findViewById(R.id.grid);
         layout.setAdapter(adapter);
 

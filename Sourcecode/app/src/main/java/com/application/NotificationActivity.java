@@ -37,7 +37,8 @@ public class NotificationActivity extends AppCompatActivity {
     private TextView year;
     private TextView todoView;
     private static String input;
-    private Slider notificationSlider;
+    private Slider notificationSliderHours;
+    private Slider notificationSliderMinutes;
     private Context context = this;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -53,8 +54,8 @@ public class NotificationActivity extends AppCompatActivity {
         this.todoView = findViewById(R.id.choosed_todo);
         this.todoView.setText(input);
 
-        this.notificationSlider = findViewById(R.id.notification_slider);
-        notificationSlider.setLabelFormatter(new LabelFormatter() {
+        this.notificationSliderHours = findViewById(R.id.notification_slider_hours);
+        notificationSliderHours.setLabelFormatter(new LabelFormatter() {
             @NonNull
             @Override
             public String getFormattedValue(float value) {
@@ -62,6 +63,19 @@ public class NotificationActivity extends AppCompatActivity {
                     return ((int) value) + " Stunde";
                 } else {
                     return ((int) value) + " Stunden";
+                }
+            }
+        });
+
+        this.notificationSliderMinutes = findViewById(R.id.notification_slider2_minutes);
+        notificationSliderMinutes.setLabelFormatter(new LabelFormatter() {
+            @NonNull
+            @Override
+            public String getFormattedValue(float value) {
+                if((int) value == 1) {
+                    return ((int) value) + " Minute";
+                } else {
+                    return ((int) value) + " Minuten";
                 }
             }
         });
@@ -88,30 +102,54 @@ public class NotificationActivity extends AppCompatActivity {
             }
         });
 
-//        NotificationCompat.Builder builder = new NotificationCompat.Builder(this,"lemubitA")
-//                .setSmallIcon(R.drawable.delete)
-//                .setContentTitle("This is a test notification")
-//                .setContentText("blablabla hier ist eine benchritigung!")
-//                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-//
-//        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(this);
 
         Button saveButton = findViewById(R.id.save_button_noti);
         saveButton.setOnClickListener(v -> {
-                float value = notificationSlider.getValue();
-            //    notificationManagerCompat.notify(100,builder.build());
-                Toast.makeText(this,"Notification Set!",Toast.LENGTH_SHORT).show();
+                int hoursValue = (int) notificationSliderHours.getValue();
+                int minutesValue = (int) notificationSliderMinutes.getValue();
+                long timeInMillis = 0L;
 
-                Intent intent = new Intent(NotificationActivity.this,NotificationBroadcast.class);
-                PendingIntent pendingIntent = PendingIntent.getBroadcast(NotificationActivity.this,0,intent,0);
+                if(hoursValue == 0 && minutesValue != 0) {
+                    if(minutesValue == 1) {
+                        Toast.makeText(this,"Du wirst in " + minutesValue + " Minute an dein ToDo erinnert",Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(this,"Du wirst in " + minutesValue + " Minuten an dein ToDo erinnert",Toast.LENGTH_SHORT).show();
+                    }
+                    timeInMillis = 60000 * minutesValue;
+                } else if(minutesValue == 0 && hoursValue != 0) {
+                    if(hoursValue == 0) {
+                        Toast.makeText(this,"Du wirst in " + hoursValue +  " Stunde an dein ToDo erinnert",Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(this,"Du wirst in " + hoursValue +  " Stunden an dein ToDo erinnert",Toast.LENGTH_SHORT).show();
+                    }
+                    timeInMillis = 3600000 * hoursValue;
+                } else if(hoursValue == 0 && minutesValue == 0) {
+                    Toast.makeText(this,"Du musst eine Zeit auswählen, an der du erinnert werden möchtest!",Toast.LENGTH_SHORT).show();
+                } else {
+                    if(minutesValue == 1 && hoursValue == 1) {
+                        Toast.makeText(this,"Du wirst in " + hoursValue +  " Stunde und " + minutesValue + " Minute an dein ToDo erinnert",Toast.LENGTH_SHORT).show();
+                    } else if(minutesValue == 1 && hoursValue > 1) {
+                        Toast.makeText(this,"Du wirst in " + hoursValue +  " Stunden und " + minutesValue + " Minute an dein ToDo erinnert",Toast.LENGTH_SHORT).show();
+                    } else if(minutesValue > 1 && hoursValue == 1) {
+                        Toast.makeText(this,"Du wirst in " + hoursValue +  " Stunde und " + minutesValue + " Minuten an dein ToDo erinnert",Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(this,"Du wirst in " + hoursValue +  " Stunden und " + minutesValue + " Minuten an dein ToDo erinnert",Toast.LENGTH_SHORT).show();
+                    }
+                    timeInMillis = 3600000 * hoursValue + 60000 * minutesValue;
+                }
 
-                AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
+                NotificationBroadcast.setToDoForNotification(input);
 
-                long timeAtButton = System.currentTimeMillis();
+                if(timeInMillis != 0L) {
+                    Intent intent = new Intent(NotificationActivity.this, NotificationBroadcast.class);
+                    PendingIntent pendingIntent = PendingIntent.getBroadcast(NotificationActivity.this, 0, intent, 0);
 
-                long tenSecInMilli = 1000 * 6;
+                    AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
-                alarmManager.set(AlarmManager.RTC_WAKEUP,timeAtButton + tenSecInMilli,pendingIntent);
+                    long timeAtButton = System.currentTimeMillis();
+                    System.out.println(timeAtButton);
+                    alarmManager.set(AlarmManager.RTC_WAKEUP, timeAtButton + timeInMillis, pendingIntent);
+                }
         });
 
     }
@@ -121,10 +159,10 @@ public class NotificationActivity extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void createNotificationChannel() {
         if(Build.VERSION.SDK_INT >= (Build.VERSION_CODES.O)) {
-            CharSequence name = "LemubitReminderChannel";
-            String description = "Channel for Lemubit Reminder";
+            CharSequence name = "NotificationReminderChannel";
+            String description = "Channel for Notification Reminder";
             int importance = NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel channel = new NotificationChannel("notifyLemubit", name, importance);
+            NotificationChannel channel = new NotificationChannel("notify", name, importance);
             channel.setDescription(description);
 
             NotificationManager notificationManager = getSystemService(NotificationManager.class);

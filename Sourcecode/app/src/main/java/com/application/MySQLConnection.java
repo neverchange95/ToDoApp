@@ -16,7 +16,7 @@ public class MySQLConnection {
 
         // Connect to database
         Class.forName("com.mysql.jdbc.Driver").newInstance();
-        connection = DriverManager.getConnection("jdbc:mysql://THAT´S SECRET :D");
+        connection = DriverManager.getConnection("jdbc:mysql://192.168.178.36:3306/TODOs","todo_michael","cQ66ubKt0MJ4emdM");
         if(!connection.isClosed()) {
             System.out.println("Successfully connected!");
         }

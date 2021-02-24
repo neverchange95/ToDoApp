@@ -1,35 +1,23 @@
 package com.application;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.media.Image;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.PowerManager;
-import android.os.TestLooperManager;
-import android.provider.Settings;
 import android.view.View;
-import android.widget.CalendarView;
-import android.widget.GridLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import androidx.appcompat.app.AppCompatActivity;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Random;
 
+
+/**
+ * @author neverchange95
+ * @version 02/2021
+ *
+ * This is the MainActivity which is shown as the app is started
+ */
 public class MainActivity extends AppCompatActivity {
-    public static String MyPREFERENCES = "MyPREFERENCES";
     private DateHandler dh = DateHandler.getInstance();
     private TextView day;
     private TextView month;
@@ -42,33 +30,39 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.overview);
 
-        // Create a new connection to database
+        // Create a new connection to database by calling the class MySQLConnection()
         try {
+            Toast.makeText(this,"Datenbankverbindung wird aufgebaut ...",Toast.LENGTH_SHORT).show();
             new MySQLConnection();
             Toast.makeText(this,"Verbindung zur Datenbank war erfolgreich!",Toast.LENGTH_SHORT).show();
         } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
         }
 
+        // Set the attributes of the different TextViews
         this.day = findViewById(R.id.day);
         this.month = findViewById(R.id.month);
         this.year = findViewById(R.id.year);
 
+        // Set the date strings (from class DateHandler) in the different TextView attributes
         day.setText(dh.getDay());
         month.setText(dh.getMonth());
         year.setText(dh.getYear());
 
-
         String[] days = dh.getAllDaysFormatted(); // get array with all days of the current month formatted like Mo. 01 from class DateHandler
+
+        // Create a new GridView for all days in a month. Class DayAdapter is handling this
         try {
             adapter = new DayAdapter(this,days,dh.getDay());
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        // Setting the layout attribute with the GridLayout to creating the static method refreshMainLayout()
         layout = findViewById(R.id.grid);
         layout.setAdapter(adapter);
 
-
+        // Setting a onClickListener on the calendar view for switching to ChangeDateActivity by clicking
         ImageView calendar = findViewById(R.id.calendar_background);
         calendar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,7 +73,11 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    // This method is called in ToDOActivity in menuButton, to refreshing the ToDoBars
+    /**
+     * This method is called in class ToDoActivity, menuButton.setOnClickListener to refresh the layout
+     * of the particular ToDoBars
+     * @see ToDoActivity
+     */
     public static void refreshMainLayout() {
         adapter.notifyDataSetChanged();
         layout.invalidateViews();

@@ -17,4 +17,5 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="w_hle_ein_datum">Wähle ein Datum:</string>
     <string name="zum_todo">Zum ToDo</string>
+    <string name="deine_todo_s"><u>Deine ToDo\'s:</u></string>
 </resources>

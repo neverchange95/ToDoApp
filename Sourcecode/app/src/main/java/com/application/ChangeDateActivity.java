@@ -84,13 +84,13 @@ public class ChangeDateActivity extends AppCompatActivity {
             // TODO: Wenn ein Datum aus dem aktuellen Monat aufgerufen wird, muss auf die ArrayList aus der HashMap dieses Monats zurück gegriffen werden und nicht das calendarChoosedTodos aufgerufen werden!
             @Override
             public void onClick(View v) {
-                PastToDoHandler handler = new PastToDoHandler("test");
-                PastToDoAdapter.setToDoAdapterArray(handler.getCalendarChoosedTodos());
+                PastToDoHandler handler = null;
                 try {
-                    handler.testDB();
+                    handler = new PastToDoHandler(day2.getText().toString() + "." + month2.getText().toString() + "." + year2.getText().toString());
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
+                PastToDoAdapter.setToDoAdapterArray(handler.getCalendarChoosedTodos());
                 Intent i = new Intent(ChangeDateActivity.this, ShowPastToDoActivity.class);
                 ShowPastToDoActivity.ChoosedDateClass t = new ShowPastToDoActivity.ChoosedDateClass(choosedDay,choosedMonth,choosedYear);
                 startActivity(i);

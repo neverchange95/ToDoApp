@@ -10,3 +10,6 @@ The sourcecode of this application you can find in this repository under ***Sour
 * Delete a ToDo from the database
 * Set a ToDo as done -> The text will be crossed out
 * Change the date using a calendar view from android and check all ToDo´s in the past
+
+### Screenshots of the application
+<img src="Screenshots/Screenshot_20210224-222852.jpg">

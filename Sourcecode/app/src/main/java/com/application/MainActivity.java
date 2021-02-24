@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Create a new GridView for all days in a month. Class DayAdapter is handling this
         try {
-            adapter = new DayAdapter(this,days,dh.getDay());
+            adapter = new DayAdapter(this,days,dh.getDay()); // Set the adapter to DayAdapter which creates the grid view for the day fields
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -76,7 +76,6 @@ public class MainActivity extends AppCompatActivity {
     /**
      * This method is called in class ToDoActivity, menuButton.setOnClickListener to refresh the layout
      * of the particular ToDoBars
-     * @see ToDoActivity
      */
     public static void refreshMainLayout() {
         adapter.notifyDataSetChanged();

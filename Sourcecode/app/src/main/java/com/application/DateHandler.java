@@ -5,14 +5,13 @@ import java.util.Calendar;
 
 /**
  * @author neverchange95
- * @version 08/02/21
+ * @version 02/21
  *
- * This class handles the different date-formats. It translate the english return values from the system to german values.
+ * This class handles the different date-formats and change the returned date format from system to for the app needed format.
+ * It is needed for the calendar view in all activities, because the the content for the view is taken from this class and placed in it.
  */
-
 public class DateHandler {
     private static DateHandler instance; // Save the instance of the DateHandler
-//    private CalendarView cv;
     private int year;
     private String month;
     private String day;
@@ -21,20 +20,6 @@ public class DateHandler {
     private static int monthInt;
     private int fistDayInMonth;
     private static ActualDate actualDate;
-
-
-
-//    public DateHandler(CalendarView calendarView) {
-//        this.cv = calendarView;
-//        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-//        SimpleDateFormat d2 = new SimpleDateFormat("EEE");
-//        dayInWords = d2.format(new Date(cv.getDate()));
-//
-//        String date = df.format(new Date(cv.getDate()));
-//        this.year = date.substring(0,date.indexOf('/'));
-//        this.month = date.substring(date.indexOf('/')+1, date.lastIndexOf('/'));
-//        this.day = date.substring(date.lastIndexOf('/')+1);
-//    }
 
     /**
      * @return DateHandler: An instance of the calendar object. Is a singleton pattern
@@ -47,7 +32,8 @@ public class DateHandler {
     }
 
     /**
-     * The constructor DateHandler calculates the different String values for the actual dayS
+     * The constructor calculates the different string values for the actual days.
+     * The days are get from the system calendar
      */
     private DateHandler() {
         SimpleDateFormat d = new SimpleDateFormat("EEEE, dd/MM/yyyy"); // set a format to get the actual day
@@ -59,7 +45,7 @@ public class DateHandler {
         this.month = getMonthInWords(date.substring(date.indexOf('/')+1, date.lastIndexOf('/'))); // set variable month to: Februar
         this.year = Integer.parseInt(date.substring(date.lastIndexOf('/')+1)); // set variable year to: 2021
 
-        actualDate = new ActualDate(this.year+"",this.month,this.day);
+        actualDate = new ActualDate(this.year+"",this.month,this.day); // Setting the elements of the actual day in the ActualDate class
 
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.YEAR,year); // Set the year
@@ -67,12 +53,7 @@ public class DateHandler {
         numberOfDays = calendar.getActualMaximum(Calendar.DAY_OF_MONTH); // Get number of days in choosed year and month
         calendar.set(Calendar.DAY_OF_MONTH,1); // Set here the first day of month, it´s important because otherwise the calendar calculate the first day from actual day
         fistDayInMonth = calendar.get(Calendar.DAY_OF_WEEK); // Get the first day in the month as int MO=2, DI=3, MI=4, DO=5, FR=6, SA=7, SO=1
-
-
-        System.out.println(calendar.get(Calendar.DAY_OF_WEEK));
-        System.out.println("Der Februar hat " + numberOfDays + " Tage!!!!!!!!!!!!!!!!!!!!!!!!!");
     }
-
 
     /**
      * @return days[]: returns all days in the actual month formatted like Mo. 01
@@ -218,6 +199,9 @@ public class DateHandler {
         this.day = day;
     }
 
+    /**
+     * @return ActualDate object, which contains the elements of the actual day
+     */
     public static ActualDate getActualDate() {
         return actualDate;
     }

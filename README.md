@@ -13,8 +13,8 @@ The sourcecode of this application you can find in this repository under ***Sour
 
 ### Screenshots of the application
 <div>
-  <img src="Screenshots/Screenshot_20210224-222852.jpg" width="200" alt="" style="margin:5px" align="left">
-  <img src="Screenshots/Screenshot_20210224-223359.jpg" width="200" alt="" style="margin:5px" align="left">
-  <img src="Screenshots/Screenshot_20210224-223334.jpg" width="200" alt="" style="margin:5px" align="left">
-  <img src="Screenshots/Screenshot_20210224-223206.jpg" width="200" alt="" style="margin:5px" align="left">
-  <img src="Screenshots/Screenshot_20210224-223212.jpg" width="200" alt="" style="margin:5px" align="left">
+  <img src="Screenshots/Screenshot_20210224-222852.jpg" width="200" alt="" style="margin:3px" align="left">
+  <img src="Screenshots/Screenshot_20210224-223359.jpg" width="200" alt="" style="margin:3px" align="left">
+  <img src="Screenshots/Screenshot_20210224-223334.jpg" width="200" alt="" style="margin:3px" align="left">
+  <img src="Screenshots/Screenshot_20210224-223206.jpg" width="200" alt="" style="margin:3px" align="left">
+  <img src="Screenshots/Screenshot_20210224-223212.jpg" width="200" alt="" style="margin:3px" align="left">

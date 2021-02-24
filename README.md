@@ -12,6 +12,7 @@ The sourcecode of this application you can find in this repository under ***Sour
 * Change the date using a calendar view from android and check all ToDo´s in the past
 
 ### Screenshots of the application
+* First Picture shows the overview of all specific days in a month. By clicking on a day, the application switches to the activity like picture two
 <div>
   <img src="Screenshots/Screenshot_20210224-222852.jpg" width="200" alt="" style="margin:3px" align="left">
   <img src="Screenshots/Screenshot_20210224-223359.jpg" width="200" alt="" style="margin:3px" align="left">

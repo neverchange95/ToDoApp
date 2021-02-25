@@ -16,10 +16,10 @@ connection = DriverManager.getConnection("jdbc:mysql://IP-Adress:3306/Database-N
 ```
   * Change the placeholder ***"IP-Adress"*** to your IP-Adress or Domain where your database is running on
   * Maybe if you use a another port than 3306 change the port ***"3306"*** to the port where your database is listen 
-  * Create a new database with the following columns:
-  * ***1. Column: Name = ID, Type = int(11), PRIMARY_KEY, AUTO_INCREMENT***
-  * ***2. Column: Name = AUFGABE, Type = varchar(50)***
-  * ***3. Column: Name = DATUM, Type = varchar(50)***
+  * Create a new database with the following tables:
+  * ***1. Table: Name = ID, Type = int(11), PRIMARY_KEY, AUTO_INCREMENT***
+  * ***2. Table: Name = AUFGABE, Type = varchar(50)***
+  * ***3. Table: Name = DATUM, Type = varchar(50)***
   * Go back to the MySQLConnection.java file
   * Change the placeholder ***"Database-Name"*** to the name you gave your database
   * Change the placeholder ***"Database-User"*** to the user name which has INSERT, UPDATE, DELETE and SELECT access to your database

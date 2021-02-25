@@ -6,7 +6,7 @@ The sourcecode of this application you can find in this repository under ***Sour
 ### Important!
 If you like to use this application on your own smartphone you have to do some things before:
 1. Import the folder "Sourcecode" into a new android studio project
-2. Download the MySQL-JDBC driver from here: https://downloads.mysql.com/archives/c-j/
+2. Download the MySQL-JDBC driver from here: https://downloads.mysql.com/archives/c-j/ use not the actual 8.0.22 driver, go to archives and download the 5.1.49
 3. In android studio go to File -> Project Structure -> Dependencies -> Click on the "+" symbol -> Choose Jar Dependency and import the mysql-connector-java-5.1.49.jar file
 4. You need a mysql or mariaDB database running in your own home network or a database which is public
 5. Open the file ***Sourcecode/app/src/main/java/com/application/MySQLConnection.java***
@@ -25,7 +25,8 @@ connection = DriverManager.getConnection("jdbc:mysql://IP-Adress:3306/Database-N
   * Change the placeholder ***"Database-User"*** to the user name which has INSERT, UPDATE, DELETE and SELECT access to your database
   * Change the placeholder ***"Database-User-Password"*** to the password which you gave the user
 6. Save the file and start the android emulator or transfer the application to your smartphone
-7. Run the app and have fun with the Todo-List :)
+7. This xml-files are optimized for the OnePlus8Pro smartphone. If you have a smartphone with a different resolution, you may have to adjust the xml files for your resolution
+8. Run the app and have fun with the Todo-List :)
 
 ### Application functions
 * A overview over all days and their ToDo´s of the actual month

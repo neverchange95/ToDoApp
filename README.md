@@ -3,6 +3,30 @@ A simple ToDoList app for android smartphones. The application was written with 
 All ToDo elements are saved in a sql-database. The connection to this database is realized with java database connectivity (jdbc).
 The sourcecode of this application you can find in this repository under ***Sourcecode/app/src/main/java/com/application*** and the design xml files under ***Sourcecode/app/src/main/res/layout***
 
+### Important!
+If you like to use this application on your own smartphone you have to do some things before:
+1. Import the folder "Sourcecode" into a new android studio project
+2. Download the MySQL-JDBC driver from here: https://downloads.mysql.com/archives/c-j/
+3. In android studio go to File -> Project Structure -> Dependencies -> Click on the "+" symbol -> Choose Jar Dependency and import the mysql-connector-java-5.1.49.jar file
+4. You need a mysql or mariaDB database running in your own home network or a database which is public
+5. Open the file ***Sourcecode/app/src/main/java/com/application/MySQLConnection.java***
+Here you will find this line code:
+```java
+connection = DriverManager.getConnection("jdbc:mysql://IP-Adress:3306/Database-Name","Database-User","Database-User-Password");
+```
+  * Change the placeholder ***"IP-Adress"*** to your IP-Adress or Domain where your database is running on
+  * Maybe if you use a another port than 3306 change the port ***"3306"*** to the port where your database is listen 
+  * Create a new database with the following columns:
+  * ***1. Column: Name = ID, Type = int(11), PRIMARY_KEY, AUTO_INCREMENT***
+  * ***2. Column: Name = AUFGABE, Type = varchar(50)***
+  * ***3. Column: Name = DATUM, Type = varchar(50)***
+  * Go back to the MySQLConnection.java file
+  * Change the placeholder ***"Database-Name"*** to the name you gave your database
+  * Change the placeholder ***"Database-User"*** to the user name which has INSERT, UPDATE, DELETE and SELECT access to your database
+  * Change the placeholder ***"Database-User-Password"*** to the password which you gave the user
+6. Save the file and start the android emulator or transfer the application to your smartphone
+7. Run the app and have fun with the Todo-List :)
+
 ### Application functions
 * A overview over all days and their ToDo´s of the actual month
 * Input a ToDo for a specific day and it will saved into a SQL-Database
